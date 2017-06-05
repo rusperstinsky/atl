@@ -1,0 +1,43 @@
+package model;
+
+public class EmpAdmin {
+
+	Integer id;
+	Integer id_emp;
+	String pass;
+	Integer puesto;
+	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getId_emp() {
+		return id_emp;
+	}
+	public void setId_emp(Integer id_emp) {
+		this.id_emp = id_emp;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public Integer getPuesto() {
+		return puesto;
+	}
+	public void setPuesto(Integer puesto) {
+		this.puesto = puesto;
+	}
+	
+	
+	public EmpAdmin parse(){
+		
+	}
+	
+}

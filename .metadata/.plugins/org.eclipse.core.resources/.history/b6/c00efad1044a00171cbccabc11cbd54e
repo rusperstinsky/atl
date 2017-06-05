@@ -1,0 +1,50 @@
+package model;
+
+import java.sql.ResultSet;
+
+public class EmpAdmin {
+
+	Integer id;
+	Integer idEmp;
+	String pass;
+	Integer puesto;
+	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getId_emp() {
+		return idEmp;
+	}
+	public void setId_emp(Integer id_emp) {
+		this.idEmp = id_emp;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public Integer getPuesto() {
+		return puesto;
+	}
+	public void setPuesto(Integer puesto) {
+		this.puesto = puesto;
+	}
+	
+	
+	public EmpAdmin parse( ResultSet rs ){
+		this.id = rs.getInt("id");
+		this.idEmp = rs.getInt("id_emp");
+		this.pass = rs.getString("pass");
+		this.puesto = rs.getInt("puesto");
+		
+		return this.
+	}
+	
+}

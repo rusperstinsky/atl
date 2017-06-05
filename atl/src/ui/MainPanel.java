@@ -1,6 +1,8 @@
 package ui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,8 +15,8 @@ import core.db.Login;
 public class MainPanel {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUsuario;
+	private JTextField txtPass;
 	private JButton btnAceptar;
 
 	/**
@@ -55,23 +57,32 @@ public class MainPanel {
 		JLabel lblUsuario = new JLabel("Usuario");
 		frame.getContentPane().add(lblUsuario, "cell 4 3,alignx trailing");
 		
-		textField = new JTextField();
-		frame.getContentPane().add(textField, "cell 5 3,alignx leading");
-		textField.setColumns(10);
+		txtUsuario = new JTextField();
+		frame.getContentPane().add(txtUsuario, "cell 5 3,alignx leading");
+		txtUsuario.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
 		frame.getContentPane().add(lblPassword, "cell 4 4,alignx trailing");
 		
-		textField_1 = new JTextField();
-		frame.getContentPane().add(textField_1, "cell 5 4,alignx leading");
-		textField_1.setColumns(10);
+		txtPass = new JTextField();
+		frame.getContentPane().add(txtPass, "cell 5 4,alignx leading");
+		txtPass.setColumns(10);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login(txtUsuario.getText().trim(), txtPass.getText().trim());
+			}
+		});
 		frame.getContentPane().add(btnAceptar, "cell 5 5");
 	}
 	
-	private void Login( String usuario, String pass ){
-		Login.verificaCredenciales(usuario, pass);
+	private void login( String usuario, String pass ){
+		if( Login.verificaCredenciales(usuario, pass) ){
+			System.out.println( "Verificado" );
+		}
 	}
 	
 	
