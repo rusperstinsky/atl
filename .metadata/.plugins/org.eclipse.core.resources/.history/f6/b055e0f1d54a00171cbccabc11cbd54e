@@ -1,0 +1,8 @@
+package model;
+
+public class EmpCallCenter {
+
+	Integer id;
+	Integer idPuesto;
+	String nombre;
+}

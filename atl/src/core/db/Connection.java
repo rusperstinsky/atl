@@ -12,8 +12,8 @@ public class Connection {
 	public static java.sql.Connection connect( ){
 		java.sql.Connection c = null;
 	    try {
-	       //Class.forName("org.postgresql.Driver");
-	       c = (java.sql.Connection) DriverManager.getConnection(getDbProperties("url"),getDbProperties("username"), getDbProperties("password"));
+	       Class.forName("org.postgresql.Driver");
+	       c = DriverManager.getConnection(getDbProperties("url"),getDbProperties("username"), getDbProperties("password"));
 	    } catch (Exception e) {
 	       e.printStackTrace();
 	       System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -33,7 +33,7 @@ public class Connection {
 	      }
 	    }
 	    b.close();
-		return result;
+		return result.replace(data.trim()+"=", "");
 	}
 	
 }
