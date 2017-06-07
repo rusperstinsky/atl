@@ -1,0 +1,58 @@
+package ui;
+
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import core.db.Tables;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+
+public class AltaTablas extends JPanel {
+	private JTextField txtNombreTabla;
+	private JButton btnAlta;
+	private JLabel lblNoExiste;
+
+	/**
+	 * Create the panel.
+	 */
+	public AltaTablas() {
+		setLayout(new MigLayout("", "[][][][][][grow]", "[][][][][]"));
+		
+		JLabel lblNombreTabla = new JLabel("Nombre Tabla");
+		add(lblNombreTabla, "cell 4 2,alignx trailing");
+		
+		txtNombreTabla = new JTextField();
+		add(txtNombreTabla, "cell 5 2,growx");
+		txtNombreTabla.setColumns(10);
+		
+		btnAlta = new JButton("Dar de Alta");
+		lblNoExiste = new JLabel("No existe la tabla ingresada");
+		btnAlta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<String> campos = Tables.verificaTabla( txtNombreTabla.getText().trim() );
+				if( campos.size() > 0 ){
+					System.out.println("La tabla contiene: " + campos.size());
+					btnAlta.setVisible(true);
+				} else {
+					System.out.println("No existe la tabla");
+					btnAlta.setVisible(true);
+				}
+			}
+		});
+				
+		lblNoExiste.setVisible(false);
+		add(lblNoExiste, "cell 5 3");
+		
+		add(btnAlta, "cell 5 4");
+
+	}
+
+}

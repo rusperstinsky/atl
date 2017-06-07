@@ -1,0 +1,70 @@
+package ui;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import core.db.LoginDB;
+import javax.swing.JPanel;
+
+public class MainPanel extends JFrame {
+	
+
+	/**
+	 * Launch the application.
+	 */
+	
+	private JFrame frame;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainPanel window = new MainPanel();
+					//window.initialize();									
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public MainPanel() {
+		initialize();
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 434, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new MigLayout("", "[grow,fill][grow,fill]", "[grow,fill]"));
+		Login loginPanel = new Login();
+		frame.getContentPane().add(loginPanel);
+		//frame.add( panel );
+		frame.getContentPane().add(loginPanel, "cell 0 0 2 1,grow");
+		loginPanel.setLayout(new MigLayout("", "[]", "[]"));
+		frame.getLayout();		
+		//frame.pack();
+	    frame.setVisible(true);
+	}	
+	
+	
+
+}

@@ -1,0 +1,89 @@
+package ui;
+
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import core.db.LoginDB;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+public class LoginPanel extends JPanel {
+	private JTextField txtUser;
+	private JPasswordField txtPass;
+	JLabel lblWarning;
+	Integer puesto;
+
+	/**
+	 * Create the panel.
+	 */
+	public LoginPanel() {
+		setLayout(new MigLayout("", "[][][][][][][][][][grow]", "[][][][][][][][][]"));
+		
+		JLabel lblLogin = new JLabel("Login");
+		//add(lblLogin, "cell 9 4");
+		
+		JLabel lblUsuario = new JLabel("Usuario");
+		add(lblUsuario, "cell 8 5,alignx trailing");
+		
+		txtUser = new JTextField();
+		add(txtUser, "cell 9 5,growx");
+		txtUser.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		add(lblPassword, "cell 8 6,alignx trailing");
+		
+		txtPass = new JPasswordField();
+		add(txtPass, "cell 9 6,growx");
+		txtPass.setColumns(10);
+		
+		JLabel lbl = new JLabel("");
+		lbl.setVisible(false);
+		add(lbl, "cell 9 7");
+		
+		
+		lblWarning = new JLabel("Credenciales Incorrectas");
+		lblWarning.setForeground(Color.red);
+		lblWarning.setVisible(false);
+		add(lblWarning, "cell 9 7");
+		
+		JLabel lbl1 = new JLabel("");
+		lbl1.setVisible(false);
+		add(lbl1, "cell 9 7");
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login(txtUser.getText().trim(), txtPass.getText().trim());
+			}
+		});
+		add(btnAceptar, "cell 9 8");
+		setVisible(true);
+		
+	}
+
+	
+	public void login( String usuario, String pass ){
+		puesto = LoginDB.verificaCredenciales(usuario, pass);
+		if( puesto != null ){
+			System.out.println( "Credenciales correctas" );
+			
+		} else {
+			lblWarning.setVisible(true);
+		}
+	}
+	
+	
+	Integer getPuesto(){
+		return puesto;
+	}
+}

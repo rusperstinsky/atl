@@ -1,0 +1,78 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import core.db.LoginDB;
+import net.miginfocom.swing.MigLayout;
+
+public class Login extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	
+	private JPanel panel;
+	private JTextField txtUsuario;
+	private JPasswordField txtPass;
+	private JButton btnAceptar;
+	private JLabel lblWarning;
+	
+	
+	public Login() {
+
+		panel = new JPanel();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new MigLayout("", "[][][][][157.00][136.00,grow][][]", "[][][][][][][]"));
+		
+		JLabel lblLogin = new JLabel("Login");
+		frame.getContentPane().add(lblLogin, "cell 5 2");
+		
+		JLabel lblUsuario = new JLabel("Usuario");
+		frame.getContentPane().add(lblUsuario, "cell 4 3,alignx trailing");
+		
+		txtUsuario = new JTextField();
+		frame.getContentPane().add(txtUsuario, "cell 5 3,alignx leading");
+		txtUsuario.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		frame.getContentPane().add(lblPassword, "cell 4 4,alignx trailing");
+		
+		txtPass = new JPasswordField();
+		frame.getContentPane().add(txtPass, "cell 5 4,alignx leading");
+		txtPass.setColumns(10);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login(txtUsuario.getText().trim(), txtPass.getText().trim());
+			}
+		});
+		
+		lblWarning = new JLabel("Credenciales Incorrectas");
+		lblWarning.setVisible(false);
+		lblWarning.setForeground(Color.red);
+		frame.getContentPane().add(lblWarning, "cell 5 5");
+		frame.getContentPane().add(btnAceptar, "cell 5 6");	  
+	}
+
+	
+	private void login( String usuario, String pass ){
+		if( LoginDB.verificaCredenciales(usuario, pass) ){
+			System.out.println( "Verificado" );
+		}
+	}
+	
+	
+}

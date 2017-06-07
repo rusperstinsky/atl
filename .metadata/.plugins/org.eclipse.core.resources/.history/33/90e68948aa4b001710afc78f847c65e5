@@ -1,0 +1,26 @@
+package ui;
+
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class AltaTablas extends JPanel {
+	private JTextField txtNombreTabla;
+
+	/**
+	 * Create the panel.
+	 */
+	public AltaTablas() {
+		setLayout(new MigLayout("", "[][][][][][grow]", "[][][]"));
+		
+		JLabel lblNombreTabla = new JLabel("Nombre Tabla");
+		add(lblNombreTabla, "cell 4 2,alignx trailing");
+		
+		txtNombreTabla = new JTextField();
+		add(txtNombreTabla, "cell 5 2,growx");
+		txtNombreTabla.setColumns(10);
+
+	}
+
+}

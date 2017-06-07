@@ -1,0 +1,78 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import core.db.LoginDB;
+import net.miginfocom.swing.MigLayout;
+
+public class Login extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	
+	private JPanel panel;
+	private JTextField txtUsuario;
+	private JPasswordField txtPass;
+	private JButton btnAceptar;
+	private JLabel lblWarning;
+	
+	
+	public void Login() {
+
+		panel = new JPanel();
+		panel.setBounds(100, 100, 450, 300);
+		panel.setLayout(new MigLayout("", "[25px][36px][86px][46px][5px][86px][119px]", "[20px][23px][][][][][]"));		
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login(txtUsuario.getText().trim(), txtPass.getText().trim());
+			}
+		});
+		
+		lblWarning = new JLabel("Credenciales Incorrectas");
+		lblWarning.setVisible(false);
+		
+		JLabel lblLogin = new JLabel("Login");
+		panel.add(lblLogin, "cell 5 2,alignx left,aligny center");
+		
+		JLabel lblUsuario = new JLabel("Usuario");
+		panel.add(lblUsuario, "cell 3 3,alignx left,aligny center");
+		
+		txtUsuario = new JTextField();
+		panel.add(txtUsuario, "cell 5 3,alignx left,aligny top");
+		txtUsuario.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		panel.add(lblPassword, "cell 3 4,alignx left,aligny center");
+		
+		txtPass = new JPasswordField();
+		panel.add(txtPass, "cell 5 4,alignx left,aligny top");
+		txtPass.setColumns(10);
+		lblWarning.setForeground(Color.red);
+		panel.add(lblWarning, "cell 5 5,alignx left,aligny center");
+		panel.add(btnAceptar, "cell 5 6,alignx left,aligny top");	  
+		panel.setVisible(true);
+	}
+
+	
+	private void login( String usuario, String pass ){
+		if( LoginDB.verificaCredenciales(usuario, pass) ){
+			System.out.println( "Verificado" );
+		}
+	}
+	
+	
+}
