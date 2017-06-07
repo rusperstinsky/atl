@@ -90,12 +90,11 @@ public class Transaciones extends JPanel {
 					for( String column : lstCampos ){
 						model.addRow(new Object[]{column, ""});
 					}			        
-				} else {
-				    lblNoExiste.setVisible(true);
 				}
 			}
 		} else{
-			System.out.println("Datos invalidos");			
+			System.out.println("Datos invalidos");
+			lblNoExiste.setVisible(true);
 		}
 	}
 	

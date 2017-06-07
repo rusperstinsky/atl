@@ -91,7 +91,7 @@ public class Transaciones extends JPanel {
 						model.addRow(new Object[]{column, ""});
 					}			        
 				} else {
-				    lblNoExiste.setVisible(true);
+				  lblNoExiste.setVisible(true);
 				}
 			}
 		} else{

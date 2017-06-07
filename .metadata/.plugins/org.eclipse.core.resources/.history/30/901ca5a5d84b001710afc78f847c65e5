@@ -26,9 +26,8 @@ public class Transaciones extends JPanel {
 	private JTable table;
 	DefaultTableModel model;
 	String[] columns = new String[] { "Columna", "Valor" };
-	Object[][] data = new Object[][] { { } };
+	Object[][] data = new Object[][] { { "", "" } };
 	private JLabel lblNoExiste;
-	private JButton btnBuscar;
 
 	/**
 	 * Create the panel.
@@ -57,7 +56,7 @@ public class Transaciones extends JPanel {
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		
-		btnBuscar = new JButton("Buscar");
+		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -71,7 +70,6 @@ public class Transaciones extends JPanel {
 		
 		lblNoExiste = new JLabel("No existe la tabla seleccionada");
 		lblNoExiste.setForeground(Color.red);
-		lblNoExiste.setVisible(false);
 		add(lblNoExiste, "cell 5 6");
 		table = new JTable( model );		
 		//table = new JTable(data, columns);		
@@ -85,17 +83,13 @@ public class Transaciones extends JPanel {
 			if( comboBox.getSelectedItem().toString().trim().equalsIgnoreCase("Insertar") ){
 				List<String> lstCampos = Tables.verificaTabla(textField.getText().trim());
 				if( lstCampos.size() > 0 ){
-					lblNoExiste.setVisible(false);
-					btnBuscar.setEnabled(false);
 					for( String column : lstCampos ){
 						model.addRow(new Object[]{column, ""});
 					}			        
-				} else {
-				    lblNoExiste.setVisible(true);
 				}
 			}
 		} else{
-			System.out.println("Datos invalidos");			
+			System.out.println("Datos invalidos");
 		}
 	}
 	
