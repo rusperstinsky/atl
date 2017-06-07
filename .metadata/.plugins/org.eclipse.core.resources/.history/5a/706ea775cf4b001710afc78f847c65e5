@@ -1,0 +1,9 @@
+package core.db;
+
+public class Utils {
+
+	
+	public Boolean isNumeric( String data ){
+		
+	}
+}

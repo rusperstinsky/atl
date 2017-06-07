@@ -60,7 +60,7 @@ public class Tables {
 		 try {
 	         Class.forName("org.postgresql.Driver");	         
 	         stmt = con.createStatement();
-	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM tablas_edit WHERE table_name = '%s';",
+	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM tablas_edit WHERE tabla = '%s';",
 	        		 tabla.trim() ));	         
 	         while ( rs.next() ) {
 	        	 valida = false;	        	 

@@ -16,12 +16,16 @@ public class LoginDB {
 		 Connection con = core.db.Connection.connect();
 		 Statement stmt = null;
 		 EmpCallCenter empCallCenter = null;
+		 Integer user = 0;
 		 try {
+			 if( Utils.isNumeric(usuario) ){
+				 user = NumberFormat.getInstance().parse(usuario).intValue();
+			 }
 	         Class.forName("org.postgresql.Driver");
 	         
 	         stmt = con.createStatement();
 	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM emp_call_center WHERE id_emp = %d AND pass = '%s';",
-	        		 NumberFormat.getInstance().parse(usuario), pass.trim() ));	         
+	        		 user, pass.trim() ));	         
 	         while ( rs.next() ) {
 	        	 empCallCenter = new EmpCallCenter();
 	        	 empCallCenter = empCallCenter.parse(rs);

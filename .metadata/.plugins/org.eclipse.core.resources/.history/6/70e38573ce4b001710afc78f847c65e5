@@ -1,0 +1,42 @@
+package ui;
+
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+
+public class Transaciones extends JPanel {
+	private JTextField textField;
+
+	/**
+	 * Create the panel.
+	 */
+	public Transaciones( Integer puesto ) {
+		setLayout(new MigLayout("", "[][][][][][grow]", "[][][][][][]"));
+		
+		JLabel lblTransaccin = new JLabel("Transacci\u00F3n");
+		add(lblTransaccin, "cell 4 3,alignx trailing");
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addItem("Actualizar");
+		comboBox.addItem("Insertar");
+		if( puesto == 1 ){
+			comboBox.addItem("Borrar");			
+		}		
+		add(comboBox, "cell 5 3,growx");
+		
+		JLabel lblTabla = new JLabel("Tabla");
+		add(lblTabla, "cell 4 4,alignx trailing");
+		
+		textField = new JTextField();
+		add(textField, "cell 5 4,growx");
+		textField.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		add(btnBuscar, "cell 5 5");
+
+	}
+
+}
