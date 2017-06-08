@@ -1,0 +1,23 @@
+package core.db;
+
+import java.sql.ResultSet;
+
+public class Utils {
+
+	
+	public static Boolean isNumeric( String data ){
+		try{
+			Long.parseLong(data);			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public static List<String> obtieneDatos( List<String> campos, ResultSet rs ){
+		
+	}
+	
+	
+}

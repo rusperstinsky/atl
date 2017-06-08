@@ -45,11 +45,9 @@ public class Transaciones extends JPanel {
 	public Transaciones( Integer puesto ) {
 		setLayout(new MigLayout("", "[][][][][grow][grow]", "[][][][][][][][][grow][]"));			
 		
+		
 		JLabel lblTabla = new JLabel("Tabla");
-		add(lblTabla, "cell 3 3,alignx trailing");
-		if( puesto == 1 ){
-			comboBox.addItem("Borrar");			
-		}
+		add(lblTabla, "cell 3 3,alignx trailing");		
 		
 		comboBox_1 = new JComboBox();
 		comboBox_1.addItem("");
@@ -60,12 +58,9 @@ public class Transaciones extends JPanel {
 		
 		JLabel lblTransaccin = new JLabel("Transacci\u00F3n");
 		add(lblTransaccin, "cell 3 4,alignx trailing");
-		
-		comboBox = new JComboBox<String>();
-		comboBox.addItem("");
-		comboBox.addItem("Insertar");
-		comboBox.addItem("Actualizar");		
-		add(comboBox, "cell 4 4,growx");
+		if( puesto == 1 ){
+			comboBox.addItem("Borrar");			
+		}
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		
@@ -80,6 +75,12 @@ public class Transaciones extends JPanel {
 		
 		lblQuery = new JLabel("");
 		lblQuery.setVisible(false);
+		
+		comboBox = new JComboBox<String>();
+		comboBox.addItem("");
+		comboBox.addItem("Insertar");
+		comboBox.addItem("Actualizar");	
+		add(comboBox, "cell 4 4,growx");
 		add(lblQuery, "cell 3 5,alignx trailing");
 		
 		txtQuery = new JTextField();
@@ -91,7 +92,30 @@ public class Transaciones extends JPanel {
 		btnAplicaQuery.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-								
+				model.setRowCount(0);
+				if(txtQuery.getText().trim().length() > 0){
+					lblWarning.setVisible(false);
+					List<String> lstCampos = Tables.verificaTabla(comboBox_1.getSelectedItem().toString().trim());					
+					String query = lblQuery.getText() + txtQuery.getText().trim();
+					List<String> lstDatos = Tables.buscaDatosTabla(comboBox_1.getSelectedItem().toString().trim(), query, lstCampos);
+					
+					if( lstCampos.size() > 0 && lstDatos.size() > 0 ){
+						lblNoExiste.setVisible(false);
+						btnBuscar.setEnabled(false);
+						comboBox.setEnabled(false);
+						comboBox_1.setEnabled(false);
+						btnAplicar.setEnabled(true);
+						for( int i=0;i<lstCampos.size();i++ ){
+							model.addRow(new Object[]{lstCampos.get(i), lstDatos.get(i)});						
+						}			        
+					} else {
+					    lblNoExiste.setVisible(true);
+					}
+					
+				} else {
+					lblWarning.setText("Debe ingresar una concidión");
+					lblWarning.setVisible(true);
+				}
 			}
 		});
 		btnAplicaQuery.setVisible(false);
@@ -107,7 +131,7 @@ public class Transaciones extends JPanel {
 			}
 		};
 		
-		lblNoExiste = new JLabel("No existe la tabla seleccionada");
+		lblNoExiste = new JLabel("No se eocnotraron coincidencias");
 		lblNoExiste.setForeground(Color.red);
 		lblNoExiste.setVisible(false);
 		add(lblNoExiste, "cell 5 7");
@@ -142,6 +166,27 @@ public class Transaciones extends JPanel {
 							lblWarning.setText("Se realizo la transaccion correctamente");
 							lblWarning.setVisible(true);
 						}
+					} else if(comboBox.getSelectedItem().toString().trim().equalsIgnoreCase("Actualizar")){
+							List<String> lstColumnas = new ArrayList<String>();
+							List<String> lstValores = new ArrayList<String>();
+							for (int i = 0; i < table.getRowCount(); i++) {
+					            for (int j = 0; j < table.getColumnCount(); j++) {
+					            	Object dato=table.getValueAt(i, j);				                
+					                if(j%2 == 0){				                	
+					                	lstColumnas.add(dato.toString());
+					                } else {
+					                	lstValores.add(dato.toString());
+					                }				            	
+					            }
+					        }
+							String error = TransaccionesDB.actualiza(comboBox_1.getSelectedItem().toString(), lstColumnas, lstValores, txtQuery.getText().trim());
+							if( error.trim().length() > 0){
+								lblWarning.setText(error);
+								lblWarning.setVisible(true);
+							} else {
+								lblWarning.setText("Se realizo la transaccion correctamente");
+								lblWarning.setVisible(true);
+							}
 					}
 				}
 			}
@@ -182,9 +227,10 @@ public class Transaciones extends JPanel {
 				    lblNoExiste.setVisible(true);
 				}
 			} else if( comboBox.getSelectedItem().toString().trim().equalsIgnoreCase("Actualizar") ){
-				lblQuery.setText(String.format("SELECT * FROM %s WHERE ", comboBox.getSelectedItem().toString()));
+				lblQuery.setText(String.format("SELECT * FROM %s WHERE ", comboBox_1.getSelectedItem().toString()));
 				lblQuery.setVisible(true);
 				txtQuery.setVisible(true);
+				btnAplicaQuery.setVisible(true);
 			}
 		} else{
 			System.out.println("Datos invalidos");			
@@ -201,6 +247,11 @@ public class Transaciones extends JPanel {
 		btnBuscar.setEnabled(true);
 		btnAplicar.setEnabled(false);
 		lblWarning.setText("");
+		lblQuery.setVisible(false);
+		txtQuery.setText("");
+		txtQuery.setVisible(false);
+		btnAplicaQuery.setVisible(false);
+		lblNoExiste.setVisible(false);
 	}
 	
 	

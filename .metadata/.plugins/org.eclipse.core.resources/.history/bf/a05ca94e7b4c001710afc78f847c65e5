@@ -1,0 +1,31 @@
+package core.db;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Utils {
+
+	
+	public static Boolean isNumeric( String data ){
+		try{
+			Long.parseLong(data);			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public static List<String> obtieneDatos( List<String> campos, ResultSet rs ) throws SQLException{		
+		List<String> lstDatos = new ArrayList<String>();		
+		for(String dato : lstDatos){
+			System.out.println("Campo: " + dato.trim() );
+			lstDatos.add(rs.getString(dato.trim()));
+		}		
+		return lstDatos;
+	}
+	
+	
+}

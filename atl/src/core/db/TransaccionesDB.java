@@ -40,4 +40,33 @@ public class TransaccionesDB {
 	}
 	
 	
+	
+	public static String actualiza( String tabla, List<String> lstColumnas, List<String> lstValores, String condicion ){
+		String error = "";
+		String valores = "";
+		String sql = "";
+		for(int i=0;i<lstColumnas.size();i++){
+			valores = valores + "," + lstColumnas.get(i) + " = " + "'" + lstValores.get(i) + "'";
+		}
+		valores = valores.replaceFirst(",", "");
+		sql = String.format("UPDATE %s SET %s WHERE %s;",
+       		 tabla, valores, condicion );
+		System.out.println("SQL: " + sql);
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         stmt.executeUpdate(sql);	         
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	    	  error = e.getMessage();
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }
+		 return error;
+	}
+	
+	
 }

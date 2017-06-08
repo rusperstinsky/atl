@@ -1,0 +1,27 @@
+package core.db;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Utils {
+
+	
+	public static Boolean isNumeric( String data ){
+		try{
+			Long.parseLong(data);			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public static List<String> obtieneDatos( List<String> campos, ResultSet rs ){
+		List<String> datos = new ArrayList<String>();
+		Integer campos
+		return datos
+	}
+	
+	
+}

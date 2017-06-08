@@ -1,5 +1,10 @@
 package core.db;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utils {
 
 	
@@ -11,4 +16,15 @@ public class Utils {
 		}
 		return true;
 	}
+	
+	
+	public static List<String> obtieneDatos( List<String> campos, ResultSet rs ) throws SQLException{
+		List<String> lstDatos = new ArrayList<String>();		
+		for(String campo : campos){
+			lstDatos.add(rs.getString(campo.trim()));
+		}		
+		return lstDatos;
+	}
+	
+	
 }
