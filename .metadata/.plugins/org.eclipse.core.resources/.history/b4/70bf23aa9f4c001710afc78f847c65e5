@@ -161,7 +161,7 @@ public class Transaciones extends JPanel {
 				                }				            	
 				            }
 				        }
-						String error = TransaccionesDB.inserta(comboBox_1.getSelectedItem().toString(), lstColumnas, lstValores, lstTipos);
+						String error = TransaccionesDB.inserta(comboBox_1.getSelectedItem().toString(), lstColumnas, lstValores);
 						if( error.trim().length() > 0){
 							lblWarning.setText(error);
 							lblWarning.setVisible(true);
@@ -184,8 +184,7 @@ public class Transaciones extends JPanel {
 					                }				            	
 					            }
 					        }
-							List<String> lstTipos = Tables.verificaTiposTabla(comboBox_1.getSelectedItem().toString().trim());
-							String error = TransaccionesDB.actualiza(comboBox_1.getSelectedItem().toString(), lstColumnas, lstValores, txtQuery.getText().trim(), lstTipos);
+							String error = TransaccionesDB.actualiza(comboBox_1.getSelectedItem().toString(), lstColumnas, lstValores, txtQuery.getText().trim());
 							if( error.trim().length() > 0){
 								lblWarning.setText(error);
 								lblWarning.setVisible(true);

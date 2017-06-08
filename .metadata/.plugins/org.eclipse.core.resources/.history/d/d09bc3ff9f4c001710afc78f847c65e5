@@ -18,9 +18,8 @@ public class TransaccionesDB {
 		columnas = columnas.replaceFirst(",", "");
 		//for(String valor : lstValores){
 		for(int i=0;i<lstValores.size();i++){
-			String v = "'" + lstValores.get(i) + "'"; 
-			if(lstValores.get(i).trim().length() <= 0 && (lstTipos.get(i).contains("integer") || lstTipos.get(i).contains("timestamp"))){
-				v = "NULL";
+			if(lstTipos.get(i).contains("integer") || lstTipos.get(i).contains("timestamp")){
+				
 			}
 			valores = valores + "," + v;
 		}
@@ -46,15 +45,12 @@ public class TransaccionesDB {
 	
 	
 	
-	public static String actualiza( String tabla, List<String> lstColumnas, List<String> lstValores, String condicion, List<String> lstTipos ){
+	public static String actualiza( String tabla, List<String> lstColumnas, List<String> lstValores, String condicion ){
 		String error = "";
 		String valores = "";
 		String sql = "";
 		for(int i=0;i<lstColumnas.size();i++){
-			String v = "'" + lstValores.get(i) + "'"; 
-			if(lstValores.get(i).trim().length() <= 0 && (lstTipos.get(i).contains("integer") || lstTipos.get(i).contains("timestamp"))){
-				v = "NULL";
-			}
+			String v = lstValores.get(i).contains("null") ? null : "'" + lstValores.get(i) + "'";
 			valores = valores + "," + lstColumnas.get(i) + " = " + v;
 		}
 		valores = valores.replaceFirst(",", "");

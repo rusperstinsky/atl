@@ -129,7 +129,7 @@ public class Tables {
 	         ResultSet rs = stmt.executeQuery(String.format("SELECT data_type FROM information_schema.columns WHERE table_name = '%s';",
 	        		 tabla.trim() ));	         
 	         while ( rs.next() ) {
-	        	 tipos.add( rs.getString("data_type") );	        	 
+	        	 campos.add( rs.getString("data_type") );	        	 
 	          }
 	         stmt.close();
 	         con.close();
@@ -137,6 +137,6 @@ public class Tables {
 	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
 	      }		 		
 		  
-		  return tipos;
+		  return campos;
 	}
 }
