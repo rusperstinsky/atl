@@ -17,8 +17,7 @@ public class TransaccionesDB {
 		}
 		columnas = columnas.replaceFirst(",", "");
 		for(String valor : lstValores){
-			String v = valor.contains("null") ? null : "'" + valor + "'";
-			valores = valores + "," + v;
+			valores = valores + "," + "'" + valor + "'";
 		}
 		valores = valores.replaceFirst(",", "");
 		sql = String.format("INSERT INTO %s (%s) VALUES(%s);",
@@ -47,8 +46,7 @@ public class TransaccionesDB {
 		String valores = "";
 		String sql = "";
 		for(int i=0;i<lstColumnas.size();i++){
-			String v = lstValores.get(i).contains("null") ? null : "'" + lstValores.get(i) + "'";
-			valores = valores + "," + lstColumnas.get(i) + " = " + v;
+			valores = valores + "," + lstColumnas.get(i) + " = " + "'" + lstValores.get(i) + "'";
 		}
 		valores = valores.replaceFirst(",", "");
 		sql = String.format("UPDATE %s SET %s WHERE %s;",

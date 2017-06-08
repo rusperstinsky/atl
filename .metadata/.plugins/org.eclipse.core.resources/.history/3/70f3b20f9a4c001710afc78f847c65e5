@@ -47,7 +47,7 @@ public class TransaccionesDB {
 		String valores = "";
 		String sql = "";
 		for(int i=0;i<lstColumnas.size();i++){
-			String v = lstValores.get(i).contains("null") ? null : "'" + lstValores.get(i) + "'";
+			String v = valor.contains("null") ? null : "'" + lstValores.get(i) + "'";
 			valores = valores + "," + lstColumnas.get(i) + " = " + v;
 		}
 		valores = valores.replaceFirst(",", "");

@@ -17,8 +17,7 @@ public class TransaccionesDB {
 		}
 		columnas = columnas.replaceFirst(",", "");
 		for(String valor : lstValores){
-			String v = valor.contains("null") ? null : "'" + valor + "'";
-			valores = valores + "," + v;
+			valores = valores + "," + "'" + valor + "'";
 		}
 		valores = valores.replaceFirst(",", "");
 		sql = String.format("INSERT INTO %s (%s) VALUES(%s);",
@@ -47,36 +46,11 @@ public class TransaccionesDB {
 		String valores = "";
 		String sql = "";
 		for(int i=0;i<lstColumnas.size();i++){
-			String v = lstValores.get(i).contains("null") ? null : "'" + lstValores.get(i) + "'";
-			valores = valores + "," + lstColumnas.get(i) + " = " + v;
+			valores = valores + "," + lstColumnas.get(i) + " = " + "'" + lstValores.get(i) + "'";
 		}
 		valores = valores.replaceFirst(",", "");
 		sql = String.format("UPDATE %s SET %s WHERE %s;",
        		 tabla, valores, condicion );
-		System.out.println("SQL: " + sql);
-		 Connection con = core.db.Connection.connect();
-		 Statement stmt = null;
-		 try {
-	         Class.forName("org.postgresql.Driver");
-	         
-	         stmt = con.createStatement();
-	         stmt.executeUpdate(sql);	         
-	         stmt.close();
-	         con.close();
-	      } catch ( Exception e ) {
-	    	  error = e.getMessage();
-	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
-	      }
-		 return error;
-	}
-	
-	
-	
-	public static String borrar( String tabla, String condicion ){
-		String error = "";
-		String sql = "";
-		sql = String.format("DELETE FROM %s WHERE %s;",
-       		 tabla, condicion );
 		System.out.println("SQL: " + sql);
 		 Connection con = core.db.Connection.connect();
 		 Statement stmt = null;

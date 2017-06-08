@@ -151,11 +151,9 @@ public class Transaciones extends JPanel {
 						for (int i = 0; i < table.getRowCount(); i++) {
 				            for (int j = 0; j < table.getColumnCount(); j++) {
 				            	Object dato=table.getValueAt(i, j);				                
-				                if(j%2 == 0){				
-				                	dato = dato == null ? "null" : dato.toString().trim();
+				                if(j%2 == 0){				                	
 				                	lstColumnas.add(dato.toString());
 				                } else {
-				                	dato = dato == null ? "null" : dato.toString().trim();
 				                	lstValores.add(dato.toString());
 				                }				            	
 				            }
@@ -174,11 +172,9 @@ public class Transaciones extends JPanel {
 							for (int i = 0; i < table.getRowCount(); i++) {
 					            for (int j = 0; j < table.getColumnCount(); j++) {
 					            	Object dato=table.getValueAt(i, j);				                
-					                if(j%2 == 0){
-					                	dato = dato == null ? "null" : dato.toString().trim();
+					                if(j%2 == 0){				                	
 					                	lstColumnas.add(dato.toString());
 					                } else {
-					                	dato = dato == null ? "null" : dato.toString().trim();
 					                	lstValores.add(dato.toString());
 					                }				            	
 					            }
@@ -191,30 +187,7 @@ public class Transaciones extends JPanel {
 								lblWarning.setText("Se realizo la transaccion correctamente");
 								lblWarning.setVisible(true);
 							}
-					} else if(comboBox.getSelectedItem().toString().trim().equalsIgnoreCase("Borrar")){
-						List<String> lstColumnas = new ArrayList<String>();
-						List<String> lstValores = new ArrayList<String>();
-						for (int i = 0; i < table.getRowCount(); i++) {
-				            for (int j = 0; j < table.getColumnCount(); j++) {
-				            	Object dato=table.getValueAt(i, j);				                
-				                if(j%2 == 0){			
-				                	dato = dato == null ? "null" : dato.toString().trim();
-				                	lstColumnas.add(dato.toString());
-				                } else {
-				                	dato = dato == null ? "null" : dato.toString().trim();
-				                	lstValores.add(dato.toString());
-				                }				            	
-				            }
-				        }
-						String error = TransaccionesDB.borrar(comboBox_1.getSelectedItem().toString(), txtQuery.getText().trim());
-						if( error.trim().length() > 0){
-							lblWarning.setText(error);
-							lblWarning.setVisible(true);
-						} else {
-							lblWarning.setText("Se realizo la transaccion correctamente");
-							lblWarning.setVisible(true);
-						}
-				}
+					}
 				}
 			}
 		});
