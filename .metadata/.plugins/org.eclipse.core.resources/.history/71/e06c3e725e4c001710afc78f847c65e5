@@ -1,0 +1,27 @@
+package core.db;
+
+import java.sql.Connection;
+import java.sql.Statement;
+
+public class TransaccionesDB {
+
+	
+	public static void insertaTablaEdit( String tabla ){
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         stmt.executeUpdate(String.format("INSERT INTO tablas_edit (tabla) VALUES('%s');",
+	        		 tabla.trim() ));	         
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	         System.exit(0);
+	      }		 				 		 
+	}
+	
+	
+}

@@ -27,8 +27,7 @@ public class Tables {
 	         stmt.close();
 	         con.close();
 	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-	         System.exit(0);
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
 	      }		 		
 		  
 		  return campos;
@@ -47,8 +46,7 @@ public class Tables {
 	         stmt.close();
 	         con.close();
 	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-	         System.exit(0);
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
 	      }		 				 		 
 	}
 	
@@ -68,11 +66,54 @@ public class Tables {
 	         stmt.close();
 	         con.close();
 	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-	         System.exit(0);
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
 	      }		 		
 		  
 		  return valida;
+	}
+	
+	
+	public static List<String> tablasEdit( ){
+		List<String> lstTablas = new ArrayList<String>();
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");	         
+	         stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery(String.format("SELECT tabla FROM tablas_edit;"));	         
+	         while ( rs.next() ) {
+	        	 lstTablas.add(rs.getString("tabla"));	        	 
+	          }
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }		 		
+		  
+		  return lstTablas;
+	}
+	
+	
+	
+	public static List<String> buscaDatosTabla( String query ){
+		List<String> datos = new ArrayList<String>();
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery( query );	         
+	         while ( rs.next() ) {
+	        	 datos.add( rs.getString("column_name") );	        	 
+	          }
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }		 		
+		  
+		  return datos;
 	}
 	
 	

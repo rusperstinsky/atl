@@ -1,0 +1,38 @@
+package core.db;
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.List;
+
+public class TransaccionesDB {
+
+	
+	public static String inserta( List<String> lstColumnas, List<String> lstValores ){
+		String error = "";
+		String columnas = "";
+		String valores = "";
+		for(String columna : lstColumnas){
+			columnas = columna + ",";
+		}
+		for(String valor : lstValores){
+			valores = valor + ",";
+		}
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         stmt.executeUpdate(String.format("INSERT INTO tablas_edit (tabla) VALUES('%s');",
+	        		 tabla.trim() ));	         
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	    	  error = e.getMessage();
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }
+		 return error;
+	}
+	
+	
+}
