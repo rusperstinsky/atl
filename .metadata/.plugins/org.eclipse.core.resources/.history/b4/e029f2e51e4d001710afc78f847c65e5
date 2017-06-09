@@ -51,7 +51,10 @@ public class TransaccionesDB {
 		String valores = "";
 		String sql = "";
 		for(int i=0;i<lstColumnas.size();i++){
-			String v = lstValores.get(i).contains("null") ? lstValores.get(i) : "'" + lstValores.get(i) + "'";
+			String v = "'" + lstValores.get(i) + "'";
+			if(lstValores.get(i).contains("null")){
+				
+			}			 
 			if(lstValores.get(i).trim().length() <= 0 && (lstTipos.get(i).contains("integer") || lstTipos.get(i).contains("timestamp"))){
 				v = "NULL";
 			}
