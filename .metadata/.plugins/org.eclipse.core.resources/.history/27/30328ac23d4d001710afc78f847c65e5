@@ -25,7 +25,7 @@ public class Connection {
     
 	private static String getDbProperties( String data ) throws FileNotFoundException, IOException{
 		String result = "";
-		FileReader f = new FileReader(new File("database.properties"));
+		FileReader f = new FileReader(new File("/work1/lux/atl/atl/src/core/db/resources/database.properties"));
 	    BufferedReader b = new BufferedReader(f);
 	    while((result = b.readLine())!=null) {
 	      if( result != null && result.trim().startsWith(data) ){
