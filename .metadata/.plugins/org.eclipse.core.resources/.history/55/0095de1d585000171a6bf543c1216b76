@@ -1,0 +1,10 @@
+package model;
+
+public class Puestos {
+
+	private Integer idPuesto;
+	private String descPuesto;
+	private String idSync;
+	private Date fechaMod
+	
+}

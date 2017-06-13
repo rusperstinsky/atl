@@ -1,0 +1,104 @@
+package ui;
+
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
+import core.db.PuestosDB;
+import model.Puestos;
+import model.PuestosTransacciones;
+import javax.swing.JButton;
+
+public class AltaUsuarios extends JPanel {
+	private JTextField txtNombre;
+	private JPasswordField txtPass;
+	private JTextField txtIdEmp;
+	private List<Puestos> lstPuestos = PuestosDB.obtienePuestos();
+	DocumentFilter filter = new UppercaseDocumentFilter();
+
+	/**
+	 * Create the panel.
+	 */
+	public AltaUsuarios() {
+		setLayout(new MigLayout("", "[][][][][][][][grow]", "[][][][][][][][]"));
+		
+		JLabel lblPuesto = new JLabel("Puesto");
+		add(lblPuesto, "cell 6 2,alignx trailing");
+		
+		final JComboBox comboBox = new JComboBox();
+		for( Puestos puesto : lstPuestos ){
+			comboBox.addItem("["+puesto.getIdPuesto() + "] " + puesto.getDescPuesto());	
+		}		
+		add(comboBox, "cell 7 2,growx");
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		add(lblNombre, "cell 6 3,alignx trailing");
+		
+		txtNombre = new JTextField();
+		txtNombre.
+		add(txtNombre, "cell 7 3,growx");
+		txtNombre.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		add(lblPassword, "cell 6 4,alignx trailing");
+		
+		txtPass = new JPasswordField();
+		add(txtPass, "cell 7 4,growx");
+		txtPass.setColumns(10);
+		
+		JLabel lblIdEmpleado = new JLabel("Id Empleado");
+		add(lblIdEmpleado, "cell 6 5,alignx trailing");
+		
+		txtIdEmp = new JTextField();
+		add(txtIdEmp, "cell 7 5,growx");
+		txtIdEmp.setColumns(10);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Integer idPuesto = null;
+				String nombre = txtNombre.getText().trim();
+				String pass = txtPass.getText().trim();
+				Integer idEmp = 0;
+				String[] p = comboBox.getSelectedItem().toString().split("]");
+				String[] p1 = p[0].toString().split(Pattern.quote("["));
+				String puesto = p1[1];
+				System.out.println("Puesto: " + puesto);
+				try{
+					idPuesto = Integer.parseInt(puesto);
+					idEmp = Integer.parseInt(txtIdEmp.getText().trim());
+				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+				if( PuestosDB.insertaUsuario(idPuesto, nombre, pass, idEmp) ){
+					comboBox.setSelectedIndex(0);
+					txtNombre.setText("");
+					txtPass.setText("");
+					txtIdEmp.setText("");
+				} else {
+					
+				}
+			}
+		});
+		
+		JLabel lblHuboUnErro = new JLabel("Hubo un erro al dar de alta el usuario");
+		lblHuboUnErro.setForeground(Color.RED);
+		lblHuboUnErro.setVisible(false);
+		add(lblHuboUnErro, "cell 7 6");
+		add(btnGuardar, "cell 7 7,alignx right");
+
+	}
+
+}

@@ -1,0 +1,38 @@
+package core.db;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.PuestosTransacciones;
+
+public class PuestosDB {
+	
+	
+	public static List<PuestosTransacciones> obtienePuestos( String tabla ){
+		List<String> campos = new ArrayList<String>();
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery(String.format("SELECT column_name FROM information_schema.columns WHERE table_name = '%s';",
+	        		 tabla.trim() ));	         
+	         while ( rs.next() ) {
+	        	 campos.add( rs.getString("column_name") );	        	 
+	          }
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }		 		
+		  
+		  return campos;
+	}
+	
+	
+
+}
