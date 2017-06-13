@@ -1,0 +1,49 @@
+package ui;
+
+import javax.swing.JPanel;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
+public class AltaUsuarios extends JPanel {
+	private JTextField txtNombre;
+	private JTextField txtPass;
+	private JTextField txtIdEmp;
+
+	/**
+	 * Create the panel.
+	 */
+	public AltaUsuarios() {
+		setLayout(new MigLayout("", "[][][][][][][][grow]", "[][][][][][]"));
+		
+		JLabel lblPuesto = new JLabel("Puesto");
+		add(lblPuesto, "cell 6 2,alignx trailing");
+		
+		JComboBox comboBox = new JComboBox();
+		add(comboBox, "cell 7 2,growx");
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		add(lblNombre, "cell 6 3,alignx trailing");
+		
+		textField = new JTextField();
+		add(textField, "cell 7 3,growx");
+		textField.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		add(lblPassword, "cell 6 4,alignx trailing");
+		
+		textField_1 = new JTextField();
+		add(textField_1, "cell 7 4,growx");
+		textField_1.setColumns(10);
+		
+		JLabel lblIdEmpleado = new JLabel("Id Empleado");
+		add(lblIdEmpleado, "cell 6 5,alignx trailing");
+		
+		textField_2 = new JTextField();
+		add(textField_2, "cell 7 5,growx");
+		textField_2.setColumns(10);
+
+	}
+
+}

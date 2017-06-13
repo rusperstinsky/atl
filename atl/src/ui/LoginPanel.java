@@ -77,7 +77,8 @@ public class LoginPanel extends JPanel {
 	public void login( String usuario, String pass ){
 		puesto = LoginDB.verificaCredenciales(usuario, pass);
 		if( puesto != null ){
-			System.out.println( "Credenciales correctas" );
+			txtPass.setText("");
+			txtUser.setText("");
 			mainWindow.transaccionesMenu( puesto );			
 		} else {
 			lblWarning.setVisible(true);

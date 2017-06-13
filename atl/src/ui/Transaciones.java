@@ -62,8 +62,7 @@ public class Transaciones extends JPanel {
 		DefaultTableModel modelo = new DefaultTableModel();
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			
+		btnBuscar.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				onBuscar();			
@@ -261,6 +260,11 @@ public class Transaciones extends JPanel {
 				lblQuery.setVisible(true);
 				txtQuery.setVisible(true);
 				btnAplicaQuery.setVisible(true);
+				List<String> lstCampos = Tables.verificaTabla(comboBox_1.getSelectedItem().toString().trim());
+				for( String column : lstCampos ){
+					model.addRow(new Object[]{column, ""});						
+				
+				}
 			}
 		} else{
 			System.out.println("Datos invalidos");			

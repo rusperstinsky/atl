@@ -139,4 +139,27 @@ public class Tables {
 		  
 		  return tipos;
 	}
+	
+	
+	
+	public static List<String> obtieneTablas( ){
+		List<String> lstTablas = new ArrayList<String>();
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'public';" ));	         
+	         while ( rs.next() ) {
+	        	 lstTablas.add( rs.getString("table_name") );	        	 
+	          }
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }		 		
+		  
+		  return lstTablas;
+	}
 }

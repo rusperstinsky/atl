@@ -1,0 +1,8 @@
+package model;
+
+public class PuestosTransacciones {
+
+	private Integer id;
+	private Integer idPuesto;
+	private String transacciones;
+}
