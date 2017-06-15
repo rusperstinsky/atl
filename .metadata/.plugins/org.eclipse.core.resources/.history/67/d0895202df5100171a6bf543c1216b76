@@ -1,21 +1,13 @@
 package ui;
 
 import javax.swing.JPanel;
-
-import core.db.PuestosDB;
-import model.Puestos;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
-
-import java.util.List;
-
 import javax.swing.JButton;
 
 public class PuestoTransacciones extends JPanel {
-	
-	private List<Puestos> lstPuestos = PuestosDB.obtienePuestos();
 
 	/**
 	 * Create the panel.
@@ -27,9 +19,6 @@ public class PuestoTransacciones extends JPanel {
 		add(lblPuesto, "cell 5 2,alignx trailing");
 		
 		JComboBox comboBox = new JComboBox();
-		for(Puestos p : lstPuestos){
-			comboBox.addItem("[" + p.getIdPuesto() + "] " + p.getDescPuesto());
-		}
 		add(comboBox, "cell 6 2,growx");
 		
 		JLabel lblTransaccionesAutorizadas = new JLabel("Transacciones Autorizadas");

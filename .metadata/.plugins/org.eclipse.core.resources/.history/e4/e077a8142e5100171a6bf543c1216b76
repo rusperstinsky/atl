@@ -88,16 +88,6 @@ public class MainWindow extends JFrame {
 		});
 		mnMenu.add(mntmAltaUsuario);
 		
-		JMenuItem mntmTransaccionesXUsuario = new JMenuItem("Transacciones X Usuario");
-		mntmTransaccionesXUsuario.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				transXUsuario( 1 );
-				
-			}
-		});
-		mnMenu.add(mntmTransaccionesXUsuario);
-		
 		JMenu mnVentana = new JMenu("Herramientas");
 		menuBar.add(mnVentana);
 		
@@ -132,7 +122,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		mnVentana.add(mntmSalir);
-		loginPanel = new LoginPanel( this );
+		loginPanel = new LoginPanel( frame );
 		//loginPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(loginPanel);
 		loginPanel.setLayout(new MigLayout("wrap,center", "[fill,center][fill,center]", "[center]"));		
@@ -194,37 +184,14 @@ public class MainWindow extends JFrame {
 		if( transaciones != null ){
 			transaciones.setVisible(false);	
 		}
+		if( altaUsuarios == null ){
+			altaUsuarios = new AltaUsuarios( );	
+		}		
 		if( puestoTransacciones != null ){
 			puestoTransacciones.setVisible(false);
 		}
-		if( altaUsuarios == null ){
-			altaUsuarios = new AltaUsuarios( );	
-		}				
 		altaUsuarios.setVisible(true);
 		setContentPane(altaUsuarios);
-		setVisible(true);
-	}
-	
-	
-	public void transXUsuario( Integer puesto ){
-		if( puesto == 1 || puesto == 2 ){
-			mnMenu.setVisible(true);	
-		}		
-		loginPanel.setVisible(false);
-		if( altaTablas != null ){
-			altaTablas.setVisible(false);	
-		}		
-		if( transaciones != null ){
-			transaciones.setVisible(false);	
-		}
-		if( altaUsuarios != null ){
-			altaUsuarios.setVisible(false);
-		}
-		if( puestoTransacciones == null ){
-			puestoTransacciones = new PuestoTransacciones();	
-		}				
-		puestoTransacciones.setVisible(true);
-		setContentPane(puestoTransacciones);
 		setVisible(true);
 	}
 	

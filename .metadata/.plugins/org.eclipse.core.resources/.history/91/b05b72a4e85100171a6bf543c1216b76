@@ -27,9 +27,6 @@ public class PuestoTransacciones extends JPanel {
 		add(lblPuesto, "cell 5 2,alignx trailing");
 		
 		JComboBox comboBox = new JComboBox();
-		for(Puestos p : lstPuestos){
-			comboBox.addItem("[" + p.getIdPuesto() + "] " + p.getDescPuesto());
-		}
 		add(comboBox, "cell 6 2,growx");
 		
 		JLabel lblTransaccionesAutorizadas = new JLabel("Transacciones Autorizadas");

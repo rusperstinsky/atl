@@ -89,13 +89,6 @@ public class MainWindow extends JFrame {
 		mnMenu.add(mntmAltaUsuario);
 		
 		JMenuItem mntmTransaccionesXUsuario = new JMenuItem("Transacciones X Usuario");
-		mntmTransaccionesXUsuario.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				transXUsuario( 1 );
-				
-			}
-		});
 		mnMenu.add(mntmTransaccionesXUsuario);
 		
 		JMenu mnVentana = new JMenu("Herramientas");
@@ -217,14 +210,14 @@ public class MainWindow extends JFrame {
 		if( transaciones != null ){
 			transaciones.setVisible(false);	
 		}
-		if( altaUsuarios != null ){
-			altaUsuarios.setVisible(false);
+		if( puestoTransacciones != null ){
+			puestoTransacciones.setVisible(false);
 		}
-		if( puestoTransacciones == null ){
-			puestoTransacciones = new PuestoTransacciones();	
+		if( altaUsuarios == null ){
+			altaUsuarios = new AltaUsuarios( );	
 		}				
-		puestoTransacciones.setVisible(true);
-		setContentPane(puestoTransacciones);
+		altaUsuarios.setVisible(true);
+		setContentPane(altaUsuarios);
 		setVisible(true);
 	}
 	

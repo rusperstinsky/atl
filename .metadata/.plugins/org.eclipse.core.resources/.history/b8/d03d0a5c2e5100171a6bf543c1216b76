@@ -89,13 +89,6 @@ public class MainWindow extends JFrame {
 		mnMenu.add(mntmAltaUsuario);
 		
 		JMenuItem mntmTransaccionesXUsuario = new JMenuItem("Transacciones X Usuario");
-		mntmTransaccionesXUsuario.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				transXUsuario( 1 );
-				
-			}
-		});
 		mnMenu.add(mntmTransaccionesXUsuario);
 		
 		JMenu mnVentana = new JMenu("Herramientas");

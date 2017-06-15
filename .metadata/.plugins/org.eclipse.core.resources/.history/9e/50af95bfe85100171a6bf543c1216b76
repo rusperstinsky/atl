@@ -28,7 +28,7 @@ public class PuestoTransacciones extends JPanel {
 		
 		JComboBox comboBox = new JComboBox();
 		for(Puestos p : lstPuestos){
-			comboBox.addItem("[" + p.getIdPuesto() + "] " + p.getDescPuesto());
+			
 		}
 		add(comboBox, "cell 6 2,growx");
 		
