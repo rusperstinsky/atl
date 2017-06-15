@@ -56,5 +56,57 @@ public class PuestosDB {
 	}
 	
 	
+	
+	
+	public static Boolean insertaPuestosXUsuario( Integer idPuesto, String transacciones ){
+		Boolean valid = true;
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         	         
+	         String sql = "";
+	         if( validaPuestoXUsuario(idPuesto) ){
+	        	 sql = String.format("INSERT INTO puestos_transacciones (id_puesto,transacciones) VALUES(%d,'%s');",
+		        		 idPuesto, transacciones.trim() );
+	         } else {
+	        	 sql = String.format("UPDATE puestos_transacciones SET transacciones = '%s' WHERE id_puesto = %d;",
+	        			 transacciones.trim(), idPuesto );
+	         }
+	         System.out.println(sql);
+	         stmt = con.createStatement();
+	         stmt.executeUpdate(sql);	         
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+	         valid = false;
+	      }
+		 return valid;
+	}
+	
+	
+	
+	public static Boolean validaPuestoXUsuario( Integer idPuesto ){
+		Boolean valid = true;
+		 Connection con = core.db.Connection.connect();
+		 Statement stmt = null;
+		 try {
+	         Class.forName("org.postgresql.Driver");
+	         
+	         stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM puestos_transacciones WHERE id_puesto = %d;",
+	        		 idPuesto));	         
+	         while ( rs.next() ) {
+	        	 valid = false;	        	 
+	          }
+	         stmt.close();
+	         con.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
+	      }		 		
+		  
+		  return valid;
+	}
 
 }
