@@ -108,31 +108,5 @@ public class PuestosDB {
 		  
 		  return valid;
 	}
-	
-	
-	
-	public static String obtieneTransaccionesXPuesto( Integer idPuesto ){
-		String lstTransacciones = "";
-		 Connection con = core.db.Connection.connect();
-		 Statement stmt = null;
-		 try {
-	         Class.forName("org.postgresql.Driver");
-	         
-	         stmt = con.createStatement();
-	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM puestos_transacciones WHERE id_puesto = %d;",
-	        		 idPuesto));	         
-	         while ( rs.next() ) {
-	        	 lstTransacciones = rs.getString("transacciones");	        	 
-	          }
-	         stmt.close();
-	         con.close();
-	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );	         
-	      }		 		
-		  
-		  return lstTransacciones;
-	}
-	
-	
 
 }

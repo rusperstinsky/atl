@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import core.db.PuestosDB;
 import core.db.Tables;
 import core.db.TransaccionesDB;
 
@@ -75,7 +74,11 @@ public class Transaciones extends JPanel {
 		
 		comboBox = new JComboBox<String>();
 		comboBox.addItem("");
-		addTransacciones(puesto);
+		comboBox.addItem("Insertar");
+		comboBox.addItem("Actualizar");
+		if( puesto == 1 ){
+			comboBox.addItem("Borrar");			
+		}
 		add(comboBox, "cell 4 4,growx");
 		add(lblQuery, "cell 3 5,alignx trailing");
 		
@@ -284,17 +287,6 @@ public class Transaciones extends JPanel {
 		btnAplicaQuery.setVisible(false);
 		lblNoExiste.setVisible(false);
 	}
-	
-	
-	
-	private void addTransacciones( Integer puesto ){
-		String transacciones = PuestosDB.obtieneTransaccionesXPuesto( puesto );
-		String[] lstTrans = transacciones.split(",");
-		for(String trans : lstTrans){
-			comboBox.addItem(trans);			
-		}		
-	}
-	
 	
 	
 }

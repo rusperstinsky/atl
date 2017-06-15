@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import core.db.PuestosDB;
 import core.db.Tables;
 import core.db.TransaccionesDB;
 
@@ -288,11 +287,7 @@ public class Transaciones extends JPanel {
 	
 	
 	private void addTransacciones( Integer puesto ){
-		String transacciones = PuestosDB.obtieneTransaccionesXPuesto( puesto );
-		String[] lstTrans = transacciones.split(",");
-		for(String trans : lstTrans){
-			comboBox.addItem(trans);			
-		}		
+		
 	}
 	
 	

@@ -289,10 +289,11 @@ public class Transaciones extends JPanel {
 	
 	private void addTransacciones( Integer puesto ){
 		String transacciones = PuestosDB.obtieneTransaccionesXPuesto( puesto );
-		String[] lstTrans = transacciones.split(",");
-		for(String trans : lstTrans){
-			comboBox.addItem(trans);			
-		}		
+		comboBox.addItem("Insertar");
+		comboBox.addItem("Actualizar");
+		if( puesto == 1 ){
+			comboBox.addItem("Borrar");			
+		}
 	}
 	
 	

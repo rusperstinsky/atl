@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				transaccionesMenu( loginPanel.getPuesto() );
+				transaccionesMenu( 1 );
 				
 			}
 		});
@@ -117,7 +117,6 @@ public class MainWindow extends JFrame {
 				if( puestoTransacciones != null ){
 					puestoTransacciones.setVisible(false);
 				}
-				mnMenu.setVisible(false);
 				loginPanel.setVisible(true);
 				setContentPane(loginPanel);
 				setVisible(true);

@@ -111,8 +111,8 @@ public class PuestosDB {
 	
 	
 	
-	public static String obtieneTransaccionesXPuesto( Integer idPuesto ){
-		String lstTransacciones = "";
+	public static List<String> obtieneTransaccionesXPuesto( Integer idPuesto ){
+		List<String> lstTransacciones = new ArrayList<String>();
 		 Connection con = core.db.Connection.connect();
 		 Statement stmt = null;
 		 try {
@@ -122,7 +122,7 @@ public class PuestosDB {
 	         ResultSet rs = stmt.executeQuery(String.format("SELECT * FROM puestos_transacciones WHERE id_puesto = %d;",
 	        		 idPuesto));	         
 	         while ( rs.next() ) {
-	        	 lstTransacciones = rs.getString("transacciones");	        	 
+	        	 valid = false;	        	 
 	          }
 	         stmt.close();
 	         con.close();
